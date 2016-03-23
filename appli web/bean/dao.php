@@ -1,25 +1,25 @@
 <?php
-	require_once("ConnexionException.php");
-	require_once("AccesTableException.php");
-	//require_once __DIR__."";
 
-	class Dao {
-		private $connexion;
+	class Dao extends SQLite3 {
 
-		public function connexion() {
-	   		try {
-			//connection
-			$this->connexion = new PDO('mysql:host=localhost;charset=UTF8;dbname=E145437J','E145437J','E145437J');	//on se connecte au sgbd
-			$this->connexion->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);	//on active la gestion des erreurs et d'exceptions
-		    }
-		    catch(PDOException $e) {
-			throw new ConnexionException("Erreur de connection");
-		    }
+	   function __construct(){
+			$this->open('my_base.db');
 	    }
 
 	 	public function deconnexion() {
-	  		$this->connexion = null;
+	  		$this->close();
+	  	}
+
+	  	public function liste($acti, $commu) {
+	  		$stmt = $this->query("SELECT ActivCode FROM activites WHERE ActivLibel='".$acti."%"."' and NomCommune ='".$commu."';");
+			print_r($stmt->fetchArray());
 	  	}
 	
 	}
+
+///TEST///
+$dao = new Dao();
+
+$dao->liste("Randonnée equestre","Anetz");
+
 ?>
