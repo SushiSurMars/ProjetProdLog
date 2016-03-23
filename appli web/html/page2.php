@@ -1,6 +1,9 @@
 <?php
 
 /* require once upon a time*/
+require_once("../bean/dao.php");
+require_once("../bean/Boite.php");
+
 $activite = $_GET["activité"];
 $commune = $_GET["commune"];
 

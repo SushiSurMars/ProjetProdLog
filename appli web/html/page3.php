@@ -1,4 +1,6 @@
-<?php 
+<?php
+require_once("../bean/dao.php");
+
 $activite = $_GET["activite"];
 $commune = $_GET["commune"];
 $numero = $_GET["numero"];
